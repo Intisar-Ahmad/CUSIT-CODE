@@ -2,32 +2,38 @@
 #include<vector>
 using namespace std;
 
-class Chai{
-public:
+// struct student{
+//     string name;
+//     int id;
+//     float gpa;
 
-    //data members or attributes
-    string name;
-    int servings;
-    vector<string> ingredients;
+//     void display(){
+//         cout<<name<<endl;
+//         cout<<id<<endl;
+//         cout<<gpa<<endl;
+//     }
+// };
 
-    //member functions
-    void displayDetails(){
-        cout<<this->name<<endl;
-        cout<<this->servings<<endl;
-        for(auto ingredient : this->ingredients){
-            cout<<ingredient<<" ";
-        }
-        cout<<endl;
+class student{
+    public:
+       string name;
+        int id;
+        float gpa;
+
+    void display(){
+        cout<<name<<endl;
+        cout<<id<<endl;
+        cout<<gpa<<endl;
     }
-
 };
 
 int main(){
-    Chai chai1;
+    student x;
+    x.name = "BHINO";
+    x.id = 16880;
+    x.gpa = 3.67;
 
-    chai1.name = "Tea";
-    chai1.servings = 8;
-    chai1.ingredients = {"water","tea","milk"};
-    chai1.displayDetails();
+    x.display();
+    x.id = 16990;
     return 0;
 }
