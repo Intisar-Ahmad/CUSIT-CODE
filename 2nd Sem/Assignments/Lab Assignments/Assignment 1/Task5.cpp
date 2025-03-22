@@ -65,10 +65,10 @@ int main()
     Person person1;
     person1.name = "Ali";
     person1.setGender('M');
-    person1.setAge(-1);
+    person1.setAge(16);
 
-    // cout << "Name: " << person1.name << endl
-    //      << "Age: " << person1.getAge() << endl
-    //      << "Gender: " << person1.getGender() << endl;
+    cout << "Name: " << person1.name << endl
+         << "Age: " << person1.getAge() << endl
+         << "Gender: " << person1.getGender() << endl;
     return 0;
 }
