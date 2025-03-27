@@ -67,7 +67,7 @@ public:
 
 int main()
 {
-    Height h1(5, 8), h2(3, 10);
+    Height h1(5, 8), h2(4, -2);
 
     cout << "Height 1: ";
     h1.getValue();
