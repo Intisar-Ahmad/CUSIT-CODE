@@ -1,42 +1,39 @@
-#include <iostream>
+#include<iostream>
 
 using namespace std;
-// addition for a complex number
-class complexNumber
-{
-public: // real + imaginary // a + bi
-    float real;
-    float imaginary;
 
-    complexNumber(float r = 0, float i = 0)
-    {
-        real = r;
-        imaginary = i;
+class complex{
+    public:                                                
+    float real{0};
+    float imag{0};//a+bi
+
+    complex(float real,float imag):real{real},imag{imag}{
+       
+    };
+
+    // operator overloading
+   void operator+(complex &c){
+    //logic
+    cout<<"i am adding\n";
+    cout<<real<<" + "<<imag<<"i"<<" + "<<c.real<<" + "<<c.imag<<"i"<<" = "<<real+c.real<<" + "<<imag+c.imag<<"i"<<endl;
+   }
+
+
+    void display(){
+        cout<<real<<" + "<<imag<<"i"<<endl;
     }
-
-    // operating overloading
-    complexNumber operator-(const complexNumber &c)
-    {
-        complexNumber temp;
-        temp.real = this->real + c.real;
-        temp.imaginary = this->imaginary + c.imaginary;
-        return temp;
-    }
-
-    //   complexNumber operator-(const complexNumber &c){
-    // do this one yourself
-    //   }
-
-  
-
 
 };
 
-int main()
-{
-    complexNumber c1(2, 3);
-    complexNumber c2(4, 5);
-    complexNumber c3 = c1 - c2;
+int main(){
+    complex c1(2.0,3.0);
+    complex c2(1.5,7.1);
+    c1.display();
+    c2.display();
+    
+   c1.real = c1.real + c2.real;
+
+   c1 + c2;
 
     return 0;
 }
