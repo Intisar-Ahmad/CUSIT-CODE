@@ -4,48 +4,75 @@
 #include <cctype>    // tolower
 using namespace std;
 
+// Intisar is very cool
+
+
 // Please do not run this code on Dev C++ or any other online compiler, as may not support the latest C++ standards.
 // This code uses things like forEach loops etc which are beyond the scope of Dev C++ as it uses a 98-Compiler.
 //  For this code to run , please use the latest version of Visaul Studio or any other IDE that supports C++17 or above.
 
-class Product
+
+// I have explained the code in comments
+
+
+class Product // This is the product class. All products are objects of this.
 {
-    string name;
+    string name;// contains name quantity and price. pretty simple
     int quantity;
     double price;
 
 public:
-    Product(string name, int qty, double price)
+    Product(string name, int qty, double price)// constructor initializing the product.
     {
+
+        // I know I know, the validation is done down below in a seperate function. 
+
         this->name = name;
         this->quantity = qty;
         this->price = price;
     }
 
+
+    // simple getters. The const is just my 'fanciness' at peak.
     string getName() const { return name; }
     int getQuantity() const { return quantity; }
     double getPrice() const { return price; }
 
-    void reduceQuantity(int qty) { quantity -= qty; }
+    void reduceQuantity(int qty) { quantity -= qty; }// if you buy a product it will get reduced.1
+
+
+    //very simple display function displays all the properties
     void display() const
     {
         cout << "Name: " << name << " | Quantity: " << quantity << " | Price: $" << price << "\n";
     }
 };
 
-class User
+
+// Inheritance Check
+class User // user class. Not necessary but kinda useful here since most of the function of customers and admin are the same.
 {
+
+
 protected:
     string email;
     string password;
 
 public:
-    User(string email, string password) : email(email), password(password) {}
+    User(string email, string password) : email(email), password(password) {} 
+
+
+    //Pure virtual function 
+    // abstract classes check
     virtual void showMenu() = 0;
+
+
+    
     virtual bool checkLogin(string inputEmail, string inputPass)
     {
         return inputEmail == email && inputPass == password;
     }
+
     virtual void changePassword()
     {
         string oldPass, newPass;
@@ -61,7 +88,7 @@ public:
         }
 
         cout << "Enter new password: ";
-        getline(cin, newPass);
+        getline(cin, newPass);// useful for spaces and stuff
 
         this->password = newPass;
         cout << "Password changed successfully.\n";
@@ -70,13 +97,16 @@ public:
 
 class Admin : public User
 {
+    //composition check
     vector<Product> &products;
-    string username = "";
+    string username = ""; //default username is always safer than garbage value;
 
 public:
     Admin(string email, string username, string password, vector<Product> &prodList)
         : User(email, password), products(prodList), username(username) {}
 
+
+        // polymorphism check
     bool checkLogin(string username, string inputPass)
     {
         return username == this->username && inputPass == this->password;
@@ -88,12 +118,14 @@ public:
         int qty;
         double price;
         cout << "Enter product name: ";
-        cin >> name;
+        cin.ignore(100,'\n');
+        getline(cin,name);
 
         // Check if name already exists (case insensitive)
         for (auto &p : products)
         {
             string existing = p.getName();
+            // this took a while to understand but it basically checks if the name matches another one in the array
             if (equal(name.begin(), name.end(), existing.begin(), existing.end(),
                       [](char a, char b)
                       { return tolower(a) == tolower(b); }))
@@ -102,7 +134,7 @@ public:
                 return;
             }
         }
-
+        // the product validation from earlier
         cout << "Enter quantity: ";
         cin >> qty;
         cout << "Enter price: ";
@@ -118,14 +150,14 @@ public:
         cout << "Product added successfully.\n";
     }
 
-    void viewProducts()
+    void viewProducts()// nothing special
     {
         if (products.empty())
         {
             cout << "No products available.\n";
             return;
         }
-        for (const auto &p : products)
+        for (const auto &p : products)// for each or range-based for . pretty cool
             p.display();
     }
 
@@ -152,20 +184,19 @@ public:
                 cout << "Logged out.\n";
                 break;
             default:
-                cout << "Invalid option.\n";
+                cout << "Invalid option.\n";// i could have broken out here but thats just inconvenient
             }
         } while (choice != 4);
     }
 };
 
-class CartItem
+class CartItem // I had to complete the four classes requirement
 {
 public:
-    Product *product;
+    Product *product;// Composition once again.
     int quantity;
 };
 
-// ---------------- CUSTOMER CLASS ----------------
 class Customer : public User
 {
     vector<Product> &products;
