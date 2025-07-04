@@ -39,9 +39,9 @@ int main() {
     b.show(); // calls B's show
     ptr->show(); // calls B's show due to virtual function
 
-
-    // C* c = new D();
-    // c->greet(); // calls D's greet
+    
+    C* c = new D();
+    c->greet(); // calls D's greet
 
     return 0;
 }
