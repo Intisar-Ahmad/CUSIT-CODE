@@ -16,6 +16,8 @@ class B{
   void show(A obj){
     cout << obj.x << endl;
   }
+
+  friend class A;
 };
 
 // class C:public B{
