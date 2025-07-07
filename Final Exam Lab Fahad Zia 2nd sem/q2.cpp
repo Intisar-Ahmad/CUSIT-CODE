@@ -12,8 +12,6 @@ class GameProfile{
     GameProfile(string n,int s):score(s),playerName(n){}
 
     friend void checkPlayerRank();
-
-
 };
 
 void checkPlayerRank(){

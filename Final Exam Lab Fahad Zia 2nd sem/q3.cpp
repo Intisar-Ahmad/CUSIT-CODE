@@ -52,8 +52,9 @@ int main() {
     MediaPlayer* audio = new AudioPlayer();
     MediaPlayer* video = new VideoPlayer();
     MediaPlayer* stream = new StreamingPlayer();
+    
 
-    audio->play();
+    (*audio).play();
     audio->stop();
     video->play();
     video->stop();
