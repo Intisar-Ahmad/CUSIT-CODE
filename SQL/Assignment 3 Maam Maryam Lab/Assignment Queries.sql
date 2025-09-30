@@ -18,7 +18,7 @@ SELECT AVG(CAST(Marks AS UNSIGNED)) AS avg_marks FROM student;
 -- • Convert FeePaid into a proper decimal number.
 -- • Show the total of all fees paid (TotalFees).
 
-SELECT StudentID, CAST(Feepaid AS DECIMAL(10,2)) FROM student;
+SELECT StudentID, CAST(Feepaid AS DECIMAL(10,2)) AS Feepaid FROM student;
 SELECT SUM((CAST(Feepaid AS DECIMAL(10,2)))) AS TotalFees FROM student;
 
 -- Q3. Format Payment for Display
@@ -35,7 +35,8 @@ SELECT StudentID, CONCAT('$', FORMAT(CAST(FeePaid AS DECIMAL(10,2)), 2)) AS Paym
 -- • Display StudentID, FirstName, and their current age in years.
 -- • Format DOB in a readable format (e.g., "Tuesday, April 15, 2003").
 
-SELECT StudentID,FirstName,TIMESTAMPDIFF(YEAR,DOB,CURDATE()) AS Age, DATE_FORMAT(DOB, '%W, %M %d, %Y') AS FormattedDOB FROM Student;
+SELECT StudentID,FirstName,TIMESTAMPDIFF(YEAR,DOB,CURDATE()) AS Age,
+DATE_FORMAT(DOB, '%W, %M %d, %Y') AS FormattedDOB FROM Student;
 
 
 -- Q5. Enrollment Tracking
@@ -47,11 +48,11 @@ SELECT StudentID,FirstName,TIMESTAMPDIFF(YEAR,DOB,CURDATE()) AS Age, DATE_FORMAT
 -- • Format the enrollment date in this format: "01-Aug-2023 09:30 AM".
 
 SELECT DATEDIFF(CURDATE(),Enrollment) AS DaysEnrolled, DATE_ADD(Enrollment,INTERVAL 6 Month) AS `Certificate Expiry`,
-DATE_SUB(Enrollment, INTERVAL 10 DAY) AS `Reminder Date`, DATE_FORMAT(Enrollment, '%d-%b-%Y %h %i %p') AS `Formatted Enrollment Date`  FROM student;
+DATE_SUB(Enrollment, INTERVAL 10 DAY) AS `Reminder Date`,
+DATE_FORMAT(Enrollment, '%d-%b-%Y %h:%i %p') AS `Formatted Enrollment Date`  FROM student;
 
 
 -- change the names of the variables if they cause issues. Also you can use CONVERT(exp,type) instead of CAST(exp AS type)
-
 
 
 
