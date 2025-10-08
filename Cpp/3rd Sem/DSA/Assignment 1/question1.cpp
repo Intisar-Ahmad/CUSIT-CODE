@@ -1,12 +1,6 @@
 #include <iostream>
 
 using namespace std;
-// Q.1: Write a C++ program to perform the following operations on singly linked list.
- // Insertion
-//  Deletion 
-//  Display
-//  Seek
-
 
 class Node
 {
