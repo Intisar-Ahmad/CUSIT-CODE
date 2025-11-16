@@ -256,7 +256,7 @@ int main()
         }
 
         orderPackage order(list,name,address,distance);
-        order.display();
+        // order.display();
         cout << endl << endl;
         
         orders.push_back(order);
@@ -289,15 +289,19 @@ int main()
 
     // dequeueing
     cout << endl << endl << "Delivering Orders:\n\n";
-    while(!belt.isEmpty()){
-        cout << "Order 1\n\n";
+    bool emptyBelt = belt.isEmpty();
+    bool emptyBag = false;
+    while(!emptyBelt){
         bagStack bag = belt.dequeue();
-        while(!bag.isEmpty()){
+        while(!emptyBag){
+            cout << "Order\n\n";
             orderPackage order = bag.pop();
             order.display();
-            cout << endl << endl;
+            emptyBag = bag.isEmpty();
+            cout << endl;
+            cout << "Order Complete\n\n";
         }
-        cout << "Order Complete\n\n";
+        emptyBelt = belt.isEmpty();
     }
     
     
