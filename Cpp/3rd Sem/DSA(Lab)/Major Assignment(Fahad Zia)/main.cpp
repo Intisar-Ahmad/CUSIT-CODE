@@ -223,51 +223,63 @@ int main()
     int isRunning = 1;
     conveyerBeltQueue belt;
 
-    while(isRunning){
-        string name;
-        string address;
-        Items list;
-        float distance;
+   // --- Inside main() ---
 
+// input loop
+while(isRunning){
+    string name;
+    string address;
+    Items list;
+    float distance;
 
-        cout << "Enter your details:\n";
+    cout << "Enter your details:\n";
 
-        cout << "Enter shop name:";
-        // cin.ignore(1, '\n'); 
-        getline(cin,name);
+    cout << "Enter shop name: ";
+    getline(cin, name);
 
-        cout << "Enter Address:";
-        // cin.ignore(1, '\n'); 
-        getline(cin,address);
+    cout << "Enter Address: ";
+    getline(cin, address);
 
-        cout << "Enter Distance:";
-        cin >> distance;
+    cout << "Enter Distance: ";
+    cin >> distance;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flush newline
 
-        cout << "Enter Items:\n";
-        int ordering = 1;
-        while(ordering){
-            string itemName;
-            cout << "Enter item name:\n";
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-            getline(cin,itemName);
-            list.append(itemName);
-            cout << "Press 0 to exit and 1 to stay:";
-            cin >> ordering;
-        }
+    cout << "Enter Items:\n";
+    int ordering = 1;
+    while(ordering){
+        string itemName;
+        cout << "Enter item name: ";
+        getline(cin, itemName);
+        list.append(itemName);
 
-        orderPackage order(list,name,address,distance);
-        // order.display();
-        cout << endl << endl;
-        
-        orders.push_back(order);
-        
-        
-
-        cout<< "Enter 1 to continue ordering and 0 to see results:";
-        cin >> isRunning;
-        cin.ignore(10,'\n');
-    
+        cout << "Press 0 to exit and 1 to stay: ";
+        cin >> ordering;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flush newline
     }
+
+    orderPackage order(list,name,address,distance);
+    orders.push_back(order);
+
+    cout << "Enter 1 to continue ordering and 0 to see results: ";
+    cin >> isRunning;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // flush newline
+}
+
+// --- Delivery loop ---
+
+cout << "\nDelivering Orders:\n\n";
+while(!belt.isEmpty()){
+    bagStack bag = belt.dequeue();
+    bool emptyBag = false; // reset for each bag
+    while(!emptyBag){
+        cout << "Order\n\n";
+        orderPackage order = bag.pop();
+        order.display();
+        cout << "Order Complete\n\n";
+        emptyBag = bag.isEmpty();
+    }
+}
+
 
     // sort the vector
     mergeSort(orders,0,orders.size() - 1);
